@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Container, List } from "semantic-ui-react";
+import { Container } from "semantic-ui-react";
 import { Activity } from "../models/activity";
 import Navbar from "./Navbar";
 import ActivityDashboard from "../../components/activities/dashboard/ActivityDashboard";
@@ -19,7 +19,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <Container style={{marginTop: '7em'}}>
+      <Container style={{marginTop: '7em'}} className=''>
         <ActivityDashboard activities={activities} />
       </Container>
     </>
