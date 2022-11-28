@@ -7,7 +7,11 @@ body {
 }
 
 .ui.grid .column {
-  background-color: white;
   border-radius: 3px;
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2), 0 4px 12px 0 rgba(0, 0, 0, 0.19);
+  background-color: white;
+}
+.ui.grid .column.activityDetails {
+  background-color: transparent;
+  height: 23rem;
 }/*# sourceMappingURL=styles.css.map */
