@@ -29,6 +29,17 @@ function App() {
     setEditMode(false);
   }
 
+  function handlerCreateOrEditActivity(activity: Activity) {
+    activity.id
+      ? setActivities([
+          ...activities.filter((x) => x.id !== activity.id),
+          activity,
+        ])
+      : setActivities([...activities, activity]);
+    setEditMode(false);
+    setSelectedActivity(activity);
+  }
+
   useEffect(() => {
     axios
       .get<Activity[]>("http://localhost:5000/api/activities")
@@ -49,6 +60,7 @@ function App() {
           handleFormOpen={handleFormOpen}
           handleFormClose={handleFormClose}
           editMode={editMode}
+          ceateOrEdit={handlerCreateOrEditActivity}
         />
       </Container>
     </Fragment>

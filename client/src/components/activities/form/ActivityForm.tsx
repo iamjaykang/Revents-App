@@ -5,9 +5,14 @@ import { Activity } from "../../../app/models/activity";
 interface Props {
   handleFormClose: () => void;
   selectedActivity: Activity | undefined;
+  ceateOrEdit: (activity: Activity) => void;
 }
 
-const ActivityForm = ({ handleFormClose, selectedActivity }: Props) => {
+const ActivityForm = ({
+  handleFormClose,
+  selectedActivity,
+  ceateOrEdit,
+}: Props) => {
   const initialState = selectedActivity ?? {
     id: "",
     title: "",
@@ -21,12 +26,14 @@ const ActivityForm = ({ handleFormClose, selectedActivity }: Props) => {
   const [activity, setActivity] = useState(initialState);
 
   function handleSubmit() {
-    console.log(activity);
+    ceateOrEdit(activity);
   }
 
-  function handleInputChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-    const {name, value} = event.target;
-    setActivity({...activity, [name]: value})
+  function handleInputChange(
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) {
+    const { name, value } = event.target;
+    setActivity({ ...activity, [name]: value });
   }
 
   return (
@@ -50,9 +57,24 @@ const ActivityForm = ({ handleFormClose, selectedActivity }: Props) => {
           name="category"
           onChange={handleInputChange}
         />
-        <Form.Input placeholder="Date" value={activity.date} name="date" onChange={handleInputChange}/>
-        <Form.Input placeholder="City" value={activity.city} name="city" onChange={handleInputChange}/>
-        <Form.Input placeholder="Venue" value={activity.venue} name="venue" onChange={handleInputChange}/>
+        <Form.Input
+          placeholder="Date"
+          value={activity.date}
+          name="date"
+          onChange={handleInputChange}
+        />
+        <Form.Input
+          placeholder="City"
+          value={activity.city}
+          name="city"
+          onChange={handleInputChange}
+        />
+        <Form.Input
+          placeholder="Venue"
+          value={activity.venue}
+          name="venue"
+          onChange={handleInputChange}
+        />
         <Button floated="right" positive type="submit" content="Submit" />
         <Button
           onClick={handleFormClose}
