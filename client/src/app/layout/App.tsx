@@ -7,15 +7,26 @@ import ActivityDashboard from "../../components/activities/dashboard/ActivityDas
 
 function App() {
   const [activities, setActivities] = useState<Activity[]>([]);
-  const [selectedActivity, setSelectedActivity] = useState<Activity | undefined>(undefined);
+  const [selectedActivity, setSelectedActivity] = useState<
+    Activity | undefined
+  >(undefined);
   const [editMode, setEditMode] = useState(false);
 
   function handleSelectActivity(id: string) {
-    setSelectedActivity(activities.find(x => x.id === id))
+    setSelectedActivity(activities.find((x) => x.id === id));
   }
 
   function handleCancelSelectedActivity() {
-    setSelectedActivity(undefined)
+    setSelectedActivity(undefined);
+  }
+
+  function handleFormOpen(id?: string) {
+    id ? handleSelectActivity(id) : handleCancelSelectedActivity();
+    setEditMode(true);
+  }
+
+  function handleFormClose() {
+    setEditMode(false);
   }
 
   useEffect(() => {
@@ -29,8 +40,16 @@ function App() {
   return (
     <Fragment>
       <Navbar />
-      <Container style={{marginTop: '7em'}}>
-        <ActivityDashboard activities={activities} selectedActivity={selectedActivity} selectActivity={handleSelectActivity} cancelSelectActivity={handleCancelSelectedActivity}/>
+      <Container style={{ marginTop: "7em" }}>
+        <ActivityDashboard
+          activities={activities}
+          selectedActivity={selectedActivity}
+          selectActivity={handleSelectActivity}
+          cancelSelectActivity={handleCancelSelectedActivity}
+          handleFormOpen={handleFormOpen}
+          handleFormClose={handleFormClose}
+          editMode={editMode}
+        />
       </Container>
     </Fragment>
   );

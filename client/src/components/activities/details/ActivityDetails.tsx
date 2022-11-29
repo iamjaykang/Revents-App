@@ -4,15 +4,15 @@ import { Activity } from "../../../app/models/activity";
 import photo from "../../../assets/images/categoryImages/culture.jpg";
 
 interface Props {
-  activity: Activity;
   selectedActivity: Activity | undefined;
   cancelSelectActivity: () => void;
+  handleFormOpen: (id?:string) => void;
 }
 
 const ActivityDetails = ({
-  activity,
   selectedActivity,
   cancelSelectActivity,
+  handleFormOpen
 }: Props) => {
   return (
     <Card fluid>
@@ -23,15 +23,15 @@ const ActivityDetails = ({
         }
       />
       <Card.Content>
-        <Card.Header>{selectedActivity && selectedActivity.title}</Card.Header>
+        <Card.Header>{selectedActivity?.title}</Card.Header>
         <Card.Meta>
-          <span>{selectedActivity && selectedActivity.date}</span>
+          <span>{selectedActivity?.date}</span>
         </Card.Meta>
-        <Card.Description>{selectedActivity && selectedActivity.description}</Card.Description>
+        <Card.Description>{selectedActivity?.description}</Card.Description>
       </Card.Content>
       <Card.Content extra>
         <Button.Group widths="2">
-          <Button basic color="blue" content="Edit" />
+          <Button onClick={() => handleFormOpen(selectedActivity?.id)} basic color="blue" content="Edit" />
           <Button
             onClick={cancelSelectActivity}
             basic
