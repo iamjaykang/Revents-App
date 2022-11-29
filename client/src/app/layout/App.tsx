@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import axios from "axios";
 import { Container } from "semantic-ui-react";
 import { Activity } from "../models/activity";
@@ -17,12 +17,12 @@ function App() {
   }, []);
 
   return (
-    <>
+    <Fragment>
       <Navbar />
-      <Container style={{marginTop: '7em'}} className=''>
+      <Container style={{marginTop: '7em'}}>
         <ActivityDashboard activities={activities} />
       </Container>
-    </>
+    </Fragment>
   );
 }
 

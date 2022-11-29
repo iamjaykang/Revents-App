@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Item, Label } from 'semantic-ui-react';
+import { Button, Item, Label, Segment } from 'semantic-ui-react';
 import { Activity } from '../../../app/models/activity'
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
 
 const ActivityList = ({activities}: Props) => {
   return (
-    <>
+    <Segment>
         <Item.Group divided>
             {activities && activities.map(activity => (
                 <Item key={activity.id}>
@@ -29,7 +29,7 @@ const ActivityList = ({activities}: Props) => {
                 </Item>
             ))}
         </Item.Group>
-    </>
+    </Segment>
   )
 }
 
