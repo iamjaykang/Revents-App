@@ -23,7 +23,7 @@ const ActivityDashboard = ({activities, selectActivity, selectedActivity, cancel
         </Grid.Column>
         <Grid.Column width='6' className='activityDetails'>
             {selectedActivity && !editMode && <ActivityDetails selectedActivity={selectedActivity} cancelSelectActivity={cancelSelectActivity} handleFormOpen={handleFormOpen}/>}
-            {editMode && <ActivityForm handleFormClose={handleFormClose}/>}
+            {editMode && <ActivityForm selectedActivity={selectedActivity} handleFormClose={handleFormClose}/>}
         </Grid.Column>
     </Grid>
   )
