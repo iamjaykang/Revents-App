@@ -7,16 +7,19 @@ import ActivityList from './ActivityList';
 
 interface Props {
     activities: Activity[];
+    selectedActivity: Activity | undefined;
+    selectActivity: (id:string) => void;
+    cancelSelectActivity: () => void;
 }
 
-const ActivityDashboard = ({activities}: Props) => {
+const ActivityDashboard = ({activities, selectActivity, selectedActivity, cancelSelectActivity}: Props) => {
   return (
     <Grid>
         <Grid.Column width='10'>
-          <ActivityList activities={activities} />
+          <ActivityList activities={activities} selectActivity={selectActivity}/>
         </Grid.Column>
         <Grid.Column width='6' className='activityDetails'>
-            <ActivityDetails activity={activities[0]} />
+            {selectedActivity && <ActivityDetails activity={activities[0]} selectedActivity={selectedActivity} cancelSelectActivity={cancelSelectActivity}/>}
             <ActivityForm />
         </Grid.Column>
     </Grid>

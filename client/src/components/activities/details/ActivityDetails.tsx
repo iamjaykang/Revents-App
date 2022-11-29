@@ -5,28 +5,39 @@ import photo from "../../../assets/images/categoryImages/culture.jpg";
 
 interface Props {
   activity: Activity;
+  selectedActivity: Activity | undefined;
+  cancelSelectActivity: () => void;
 }
 
-const ActivityDetails = ({ activity }: Props) => {
+const ActivityDetails = ({
+  activity,
+  selectedActivity,
+  cancelSelectActivity,
+}: Props) => {
   return (
     <Card fluid>
       <Image
         src={
-          activity &&
-          require(`../../../assets/images/categoryImages/${activity.category.toLowerCase()}.jpg`)
+          selectedActivity &&
+          require(`../../../assets/images/categoryImages/${selectedActivity.category.toLowerCase()}.jpg`)
         }
       />
       <Card.Content>
-        <Card.Header>Matthew</Card.Header>
+        <Card.Header>{selectedActivity && selectedActivity.title}</Card.Header>
         <Card.Meta>
-          <span>{activity && activity.date}</span>
+          <span>{selectedActivity && selectedActivity.date}</span>
         </Card.Meta>
-        <Card.Description>{activity && activity.description}</Card.Description>
+        <Card.Description>{selectedActivity && selectedActivity.description}</Card.Description>
       </Card.Content>
       <Card.Content extra>
         <Button.Group widths="2">
           <Button basic color="blue" content="Edit" />
-          <Button basic color="grey" content="Cancel" />
+          <Button
+            onClick={cancelSelectActivity}
+            basic
+            color="grey"
+            content="Cancel"
+          />
         </Button.Group>
       </Card.Content>
     </Card>
