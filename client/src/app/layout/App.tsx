@@ -10,7 +10,7 @@ import { useStore } from "../stores/store";
 import { observer } from "mobx-react-lite";
 
 function App() {
-  const {activityStore} = useStore();
+  const { activityStore } = useStore();
 
   const [activities, setActivities] = useState<Activity[]>([]);
   const [selectedActivity, setSelectedActivity] = useState<
@@ -18,23 +18,6 @@ function App() {
   >(undefined);
   const [editMode, setEditMode] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-
-  function handleSelectActivity(id: string) {
-    setSelectedActivity(activities.find((x) => x.id === id));
-  }
-
-  function handleCancelSelectedActivity() {
-    setSelectedActivity(undefined);
-  }
-
-  function handleFormOpen(id?: string) {
-    id ? handleSelectActivity(id) : handleCancelSelectedActivity();
-    setEditMode(true);
-  }
-
-  function handleFormClose() {
-    setEditMode(false);
-  }
 
   function handlerCreateOrEditActivity(activity: Activity) {
     setSubmitting(true);
@@ -71,20 +54,14 @@ function App() {
     activityStore.loadActivities();
   }, [activityStore]);
 
-  if (activityStore.loadingInitial) return <LoadingComponent content="Loading app" />;
+  if (activityStore.loadingInitial)
+    return <LoadingComponent content="Loading app" />;
 
   return (
     <Fragment>
-      <Navbar openCreateForm={handleFormOpen} />
+      <Navbar />
       <Container style={{ marginTop: "7em" }}>
         <ActivityDashboard
-          activities={activityStore.activities}
-          selectedActivity={selectedActivity}
-          selectActivity={handleSelectActivity}
-          cancelSelectActivity={handleCancelSelectedActivity}
-          handleFormOpen={handleFormOpen}
-          handleFormClose={handleFormClose}
-          editMode={editMode}
           ceateOrEdit={handlerCreateOrEditActivity}
           deleteActivity={handleDeleteActivity}
           submitting={submitting}
