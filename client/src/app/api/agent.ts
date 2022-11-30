@@ -9,15 +9,15 @@ const sleep = (delay: number) => {
 
 axios.defaults.baseURL = "http://localhost:5000/api";
 
-axios.interceptors.response.use(async res => {
-    try {
-        await sleep(1000);
-        return res;
-    } catch (error) {
-        console.log(error);
-        return await Promise.reject(error);
-    }
-})
+axios.interceptors.response.use(async (res) => {
+  try {
+    await sleep(1000);
+    return res;
+  } catch (error) {
+    console.log(error);
+    return await Promise.reject(error);
+  }
+});
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
@@ -30,6 +30,11 @@ const requests = {
 
 const Activities = {
   list: () => requests.get<Activity[]>("/activities"),
+  details: (id: string) => requests.get<Activity>(`/activity/${id}`),
+  create: (activity: Activity) => axios.post<void>("/activities/", activity),
+  update: (activity: Activity) =>
+    axios.put<void>(`/activities/${activity.id}`, activity),
+  delete: (id: string) => axios.delete<void>(`/activities/${id}`),
 };
 
 const agent = {
