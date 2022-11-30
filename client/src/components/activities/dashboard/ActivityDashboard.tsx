@@ -8,15 +8,11 @@ import ActivityForm from "../form/ActivityForm";
 import ActivityList from "./ActivityList";
 
 interface Props {
-  ceateOrEdit: (activity: Activity) => void;
   deleteActivity: (id: string) => void;
-  submitting: boolean;
 }
 
 const ActivityDashboard = ({
-  ceateOrEdit,
   deleteActivity,
-  submitting,
 }: Props) => {
   const { activityStore } = useStore();
 
@@ -25,12 +21,12 @@ const ActivityDashboard = ({
   return (
     <Grid>
       <Grid.Column width="10">
-        <ActivityList deleteActivity={deleteActivity} submitting={submitting} />
+        <ActivityList deleteActivity={deleteActivity} />
       </Grid.Column>
       <Grid.Column width="6" className="activityDetails">
         {selectedActivity && !editMode && <ActivityDetails />}
         {editMode && (
-          <ActivityForm ceateOrEdit={ceateOrEdit} submitting={submitting} />
+          <ActivityForm />
         )}
       </Grid.Column>
     </Grid>

@@ -5,13 +5,12 @@ import { useStore } from "../../../app/stores/store";
 
 interface Props {
   deleteActivity: (id: string) => void;
-  submitting: boolean;
 }
 
-const ActivityList = ({ deleteActivity, submitting }: Props) => {
+const ActivityList = ({ deleteActivity }: Props) => {
   const { activityStore } = useStore();
 
-  const { activities, selectActivity } = activityStore;
+  const { activities, selectActivity, loading: submitting } = activityStore;
   const [target, setTarget] = useState("");
 
   function handleActivityDelete(
