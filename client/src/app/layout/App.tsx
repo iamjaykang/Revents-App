@@ -17,7 +17,9 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/activities" element={<ActivityDashboard />} />
           <Route path="/activities/:id" element={<ActivityDetails />} />
-          <Route path="/create-activity" element={<ActivityForm />} />
+          {["/create-activity", "/manage/:id"].map((path) => (
+            <Route key="activity-form" path={path} element={<ActivityForm />} />
+          ))}
         </Routes>
       </Container>
     </Fragment>
