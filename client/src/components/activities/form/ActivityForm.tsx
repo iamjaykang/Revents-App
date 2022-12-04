@@ -8,7 +8,6 @@ const ActivityForm = () => {
 
   const {
     selectedActivity,
-    closeForm,
     loading: submitting,
     createActivity,
     updateActivity,
@@ -85,7 +84,6 @@ const ActivityForm = () => {
           content="Submit"
         />
         <Button
-          onClick={closeForm}
           floated="right"
           type="button"
           content="Cancel"
