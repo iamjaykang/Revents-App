@@ -21,19 +21,14 @@ function App() {
           path={"/*"}
           element={
             <>
-              <Navbar key="navbar" />
-              <Container key="container" style={{ marginTop: "7em" }}>
-                <Routes key="routes">
-                  <Route
-                    path="/activities"
-                    element={<ActivityDashboard key={location.key} />}
-                  />
-                  <Route
-                    path="/activities/:id"
-                    element={<ActivityDetails key={location.key} />}
-                  />
+              <Navbar />
+              <Container style={{ marginTop: "7em" }}>
+                <Routes>
+                  <Route path="/activities" element={<ActivityDashboard />} />
+                  <Route path="/activities/:id" element={<ActivityDetails />} />
                   {["/create-activity", "/manage/:id"].map((path) => (
                     <Route
+                      key="activity-form"
                       path={path}
                       element={<ActivityForm key={location.key} />}
                     />
