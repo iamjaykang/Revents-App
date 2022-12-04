@@ -11,23 +11,33 @@ import ActivityDetails from "../../components/activities/details/ActivityDetails
 function App() {
   let location = useLocation();
 
-  useEffect(() => {
-  }, [location])
-  
+  useEffect(() => {}, [location]);
 
   return (
     <Fragment>
-      <Navbar />
-      <Container style={{ marginTop: "7em" }}>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/activities" element={<ActivityDashboard />} />
-          <Route path="/activities/:id" element={<ActivityDetails />} />
-          {["/create-activity", "/manage/:id"].map((path) => (
-            <Route path={path} element={<ActivityForm key={location.key} />} />
-          ))}
-        </Routes>
-      </Container>
+      <Routes>
+        <Route path="/" element={<HomePage/>} />
+        <Route
+          path={"/*"}
+          element={
+            <>
+              <Navbar />
+              <Container style={{ marginTop: "7em" }}>
+                <Routes>
+                  <Route path="/activities" element={<ActivityDashboard key={location.key} />} />
+                  <Route path="/activities/:id" element={<ActivityDetails key={location.key} />} />
+                  {["/create-activity", "/manage/:id"].map((path) => (
+                    <Route
+                      path={path}
+                      element={<ActivityForm key={location.key} />}
+                    />
+                  ))}
+                </Routes>
+              </Container>
+            </>
+          }
+        />
+      </Routes>
     </Fragment>
   );
 }
