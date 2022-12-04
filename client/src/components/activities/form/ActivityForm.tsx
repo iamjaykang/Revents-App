@@ -1,11 +1,13 @@
 import { observer } from "mobx-react-lite";
 import React, { ChangeEvent, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Button, Form, Segment } from "semantic-ui-react";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { useStore } from "../../../app/stores/store";
+import { v4 as uuid } from "uuid";
 
 const ActivityForm = () => {
+  let navigate = useNavigate();
   const { activityStore } = useStore();
 
   const {
@@ -13,7 +15,7 @@ const ActivityForm = () => {
     createActivity,
     updateActivity,
     loadActivity,
-    loadingInitial
+    loadingInitial,
   } = activityStore;
 
   const { id } = useParams<{ id: string }>();
@@ -33,7 +35,19 @@ const ActivityForm = () => {
   }, [id, loadActivity]);
 
   function handleSubmit() {
-    activity.id ? updateActivity(activity) : createActivity(activity);
+    if (activity.id.length === 0) {
+      let newActivity = {
+        ...activity,
+        id: uuid(),
+      };
+      createActivity(newActivity).then(() =>
+        navigate(`/activities/${newActivity.id}`)
+      );
+    } else {
+      updateActivity(activity).then(() =>
+        navigate(`/activities/${activity.id}`)
+      );
+    }
   }
 
   function handleInputChange(
@@ -43,7 +57,7 @@ const ActivityForm = () => {
     setActivity({ ...activity, [name]: value });
   }
 
-  if (loadingInitial) return <LoadingComponent content="Loading Activity..."/>
+  if (loadingInitial) return <LoadingComponent content="Loading Activity..." />;
 
   return (
     <Segment clearing>
