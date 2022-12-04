@@ -7,7 +7,7 @@ const ActivityList = () => {
   const { activityStore } = useStore();
 
   const {
-    activities,
+    activitiesByDate,
     selectActivity,
     loading: submitting,
     deleteActivity,
@@ -24,8 +24,8 @@ const ActivityList = () => {
   return (
     <Segment>
       <Item.Group divided>
-        {activities &&
-          activities.map((activity) => (
+        {activitiesByDate &&
+          activitiesByDate.map((activity) => (
             <Item key={activity.id}>
               <Item.Content>
                 <Item.Header as="a">{activity.title}</Item.Header>
