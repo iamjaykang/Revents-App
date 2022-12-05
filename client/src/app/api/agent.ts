@@ -4,6 +4,7 @@ import { Navigate, Router, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { history } from "../..";
 import { Activity } from "../models/activity";
+import { store } from "../stores/store";
 
 const sleep = (delay: number) => {
   return new Promise((resolve) => {
@@ -25,7 +26,7 @@ axios.interceptors.response.use(
         if (data.errors) {
           const modalStateErrors = [];
           for (const key in data.errors) {
-            modalStateErrors.push(data.errors[key])
+            modalStateErrors.push(data.errors[key]);
           }
           throw modalStateErrors.flat();
         } else {
@@ -37,10 +38,11 @@ axios.interceptors.response.use(
         break;
       case 404:
         toast.error("not found");
-        history.push('/not-found')
+        history.push("/not-found");
         break;
       case 500:
-        toast.error("server error");
+        store.commonStore.setServerError(data);
+        history.push("/server-error");
         break;
     }
     return Promise.reject(error);
