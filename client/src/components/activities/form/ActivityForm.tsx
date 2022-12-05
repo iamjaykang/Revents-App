@@ -17,6 +17,7 @@ const ActivityForm = () => {
     updateActivity,
     loadActivity,
     loadingInitial,
+    setLoadingInitial,
   } = activityStore;
 
   const { id } = useParams<{ id: string }>();
@@ -32,7 +33,11 @@ const ActivityForm = () => {
   });
 
   useEffect(() => {
-    if (id) loadActivity(id).then((activity) => setActivity(activity!));
+    if (id) {
+      loadActivity(id).then((activity) => setActivity(activity!));
+    } else {
+      setLoadingInitial(false);
+    }
   }, [id, loadActivity]);
 
   function handleSubmit() {
