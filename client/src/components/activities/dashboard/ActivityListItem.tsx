@@ -1,61 +1,65 @@
-import React, { SyntheticEvent, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { Button, Item, Label } from 'semantic-ui-react'
-import { Activity } from '../../../app/models/activity'
-import { useStore } from '../../../app/stores/store'
+import React, { SyntheticEvent, useState } from "react";
+import { Link } from "react-router-dom";
+import { Button, Icon, Item, Label, Segment } from "semantic-ui-react";
+import { Activity } from "../../../app/models/activity";
+import { useStore } from "../../../app/stores/store";
+import userImg from "../../../assets/images/user.png";
 
 interface Props {
-    activity: Activity
+  activity: Activity;
 }
 
-const ActivityListItem = ({activity}: Props) => {
-    const { activityStore } = useStore();
+const ActivityListItem = ({ activity }: Props) => {
+  const { activityStore } = useStore();
 
-    const {
-      loading: submitting,
-      deleteActivity,
-    } = activityStore;
-    const [target, setTarget] = useState("");
-  
-    function handleActivityDelete(
-      e: SyntheticEvent<HTMLButtonElement>,
-      id: string
-    ) {
-      setTarget(e.currentTarget.name);
-      deleteActivity(id);
-    }
+  const { loading: submitting, deleteActivity } = activityStore;
+  const [target, setTarget] = useState("");
+
+  function handleActivityDelete(
+    e: SyntheticEvent<HTMLButtonElement>,
+    id: string
+  ) {
+    setTarget(e.currentTarget.name);
+    deleteActivity(id);
+  }
   return (
-    <Item>
-    <Item.Content>
-      <Item.Header as="a">{activity.title}</Item.Header>
-      <Item.Meta>{activity.date}</Item.Meta>
-      <Item.Description>
-        <div>{activity.description}</div>
-        <div>
-          {activity.city}, {activity.venue}
-        </div>
-      </Item.Description>
-      <Item.Extra>
+    <Segment.Group>
+      <Segment>
+        <Item.Group>
+          <Item>
+            <Item.Image
+              size="tiny"
+              circular
+              src={require("../../../assets/images/user.png")}
+            />
+            <Item.Content>
+              <Item.Header as={Link} to={`/activities/${activity.id}`}>
+                {activity.title}
+              </Item.Header>
+              <Item.Description>Hosted by Jay</Item.Description>
+            </Item.Content>
+          </Item>
+        </Item.Group>
+      </Segment>
+      <Segment>
+        <span>
+          <Icon name="clock" /> {activity.date}
+          <Icon name="marker" /> {activity.venue}
+        </span>
+      </Segment>
+      <Segment secondary>Attendees go here</Segment>
+      <Segment clearing>
+        <span>{activity.description}</span>
         <Button
           as={Link}
           to={`/activities/${activity.id}`}
+          color="teal"
           floated="right"
           content="View"
-          color="blue"
         />
-        <Button
-          name={activity.id}
-          loading={submitting && target === activity.id}
-          onClick={(e) => handleActivityDelete(e, activity.id)}
-          floated="right"
-          content="Delete"
-          color="red"
-        />
-        <Label basic content={activity.category} />
-      </Item.Extra>
-    </Item.Content>
-  </Item>
-  )
-}
+      </Segment>
+    </Segment.Group>
+  );
+};
 
-export default ActivityListItem
+export default ActivityListItem;
