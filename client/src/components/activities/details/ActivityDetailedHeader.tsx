@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import { observer } from "mobx-react-lite";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -42,7 +43,7 @@ const ActivityDetailedHeader = ({ activity }: Props) => {
                   content={activity.title}
                   style={{ color: "white" }}
                 />
-                <p>{activity.date}</p>
+                <p>{format(activity.date!, 'dd MMM yyyy')}</p>
                 <p>
                   Hosted by <strong>Bob</strong>
                 </p>
