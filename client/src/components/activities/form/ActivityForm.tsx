@@ -15,6 +15,8 @@ const ActivityForm = () => {
 
   const {
     loading: submitting,
+    createActivity,
+    updateActivity,
     loadActivity,
     loadingInitial,
   } = activityStore;
