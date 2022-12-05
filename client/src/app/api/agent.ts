@@ -1,4 +1,5 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
+import { config } from "process";
 import { useRef } from "react";
 import { Navigate, Router, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -20,17 +21,22 @@ axios.interceptors.response.use(
     return res;
   },
   (error: AxiosError) => {
-    const { data, status }: { data: any; status: number } = error.response!;
+    const { data, status, config }: { data: any; status: number; config: any } =
+      error.response!;
     switch (status) {
       case 400:
+        if (typeof data === "string") {
+          toast.error("bad request");
+        }
+        if (config.method === "get" && data.errors.hasOwnProperty("id")) {
+          history.push("/not-found");
+        }
         if (data.errors) {
           const modalStateErrors = [];
           for (const key in data.errors) {
             modalStateErrors.push(data.errors[key]);
           }
           throw modalStateErrors.flat();
-        } else {
-          toast.error(data);
         }
         break;
       case 401:
