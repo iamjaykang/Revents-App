@@ -1,5 +1,5 @@
 import React from "react";
-import { Header, Menu, Segment } from "semantic-ui-react";
+import { Header, Menu } from "semantic-ui-react";
 import Calendar from 'react-calendar'
 
 const ActivityFilters = () => {

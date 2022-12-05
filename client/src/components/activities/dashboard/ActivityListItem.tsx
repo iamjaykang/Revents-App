@@ -1,26 +1,13 @@
-import React, { SyntheticEvent, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { Button, Icon, Item, Segment } from "semantic-ui-react";
 import { Activity } from "../../../app/models/activity";
-import { useStore } from "../../../app/stores/store";
 
 interface Props {
   activity: Activity;
 }
 
 const ActivityListItem = ({ activity }: Props) => {
-  const { activityStore } = useStore();
-
-  const { loading: submitting, deleteActivity } = activityStore;
-  const [target, setTarget] = useState("");
-
-  function handleActivityDelete(
-    e: SyntheticEvent<HTMLButtonElement>,
-    id: string
-  ) {
-    setTarget(e.currentTarget.name);
-    deleteActivity(id);
-  }
   return (
     <Segment.Group>
       <Segment>
@@ -43,7 +30,7 @@ const ActivityListItem = ({ activity }: Props) => {
       <Segment>
         <span>
           <Icon name="clock" /> {activity.date}
-          <Icon name="marker" /> {activity.venue}
+          <Icon name="marker" style={{ marginLeft: 6 }} /> {activity.venue}
         </span>
       </Segment>
       <Segment secondary>Attendees go here</Segment>
