@@ -1,4 +1,7 @@
 using API.Extensions;
+using Application.Activities;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 
 namespace API
 {
@@ -15,6 +18,8 @@ namespace API
         {
 
             services.AddControllers();
+            services.AddFluentValidationAutoValidation();
+            services.AddValidatorsFromAssemblyContaining<Create>(); 
             services.AddApplicationServices(_config);
         }
 
