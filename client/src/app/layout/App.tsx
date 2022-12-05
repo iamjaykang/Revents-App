@@ -3,10 +3,13 @@ import { Container } from "semantic-ui-react";
 import Navbar from "./Navbar";
 import ActivityDashboard from "../../components/activities/dashboard/ActivityDashboard";
 import { observer } from "mobx-react-lite";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import HomePage from "../../components/home/HomePage";
 import ActivityForm from "../../components/activities/form/ActivityForm";
 import ActivityDetails from "../../components/activities/details/ActivityDetails";
+import TestError from "../../components/errors/TestError";
+import { ToastContainer } from "react-toastify";
+import NotFound from "../../components/errors/NotFound";
 
 function App() {
   let location = useLocation();
@@ -15,6 +18,7 @@ function App() {
 
   return (
     <>
+      <ToastContainer position="bottom-right" hideProgressBar />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route
@@ -33,6 +37,8 @@ function App() {
                       element={<ActivityForm key={location.key} />}
                     />
                   ))}
+                  <Route path="/errors" element={<TestError />} />
+                  <Route path="*" element={<NotFound />} />
                 </Routes>
               </Container>
             </>
