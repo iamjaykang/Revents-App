@@ -1,52 +1,31 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Container } from "semantic-ui-react";
 import Navbar from "./Navbar";
-import ActivityDashboard from "../../components/activities/dashboard/ActivityDashboard";
 import { observer } from "mobx-react-lite";
-import { Route, Routes, useLocation } from "react-router-dom";
-import HomePage from "../../components/home/HomePage";
-import ActivityForm from "../../components/activities/form/ActivityForm";
-import ActivityDetails from "../../components/activities/details/ActivityDetails";
-import TestError from "../../components/errors/TestError";
+import { Outlet, useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import NotFound from "../../components/errors/NotFound";
-import ServerError from "../../components/errors/ServerError";
+import { useStore } from "../stores/store";
+import HomePage from "../../components/home/HomePage";
 
 function App() {
   let location = useLocation();
+  const { commonStore } = useStore();
 
   useEffect(() => {}, [location]);
 
   return (
     <>
       <ToastContainer position="bottom-right" hideProgressBar />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route
-          path={"/*"}
-          element={
-            <>
-              <Navbar />
-              <Container style={{ marginTop: "7em" }}>
-                <Routes>
-                  <Route path="/activities" element={<ActivityDashboard />} />
-                  <Route path="/activities/:id" element={<ActivityDetails />} />
-                  {["/create-activity", "/manage/:id"].map((path) => (
-                    <Route
-                      key="activity-form"
-                      path={path}
-                      element={<ActivityForm key={location.key} />}
-                    />
-                  ))}
-                  <Route path="/errors" element={<TestError />} />
-                  <Route path="/server-error" element={<ServerError />} />
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </Container>
-            </>
-          }
-        />
-      </Routes>
+      {location.pathname === "/" ? (
+        <HomePage />
+      ) : (
+        <>
+          <Navbar />
+          <Container style={{ marginTop: "7em" }}>
+            <Outlet />
+          </Container>
+        </>
+      )}
     </>
   );
 }

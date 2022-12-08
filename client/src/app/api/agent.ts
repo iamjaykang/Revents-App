@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { toast } from "react-toastify";
-import { history } from "../..";
 import { Activity } from "../models/activity";
+import { router } from "../router/Routes";
 import { store } from "../stores/store";
 
 const sleep = (delay: number) => {
@@ -26,7 +26,6 @@ axios.interceptors.response.use(
           toast.error("bad request");
         }
         if (config.method === "get" && data.errors.hasOwnProperty("id")) {
-          history.push("/not-found");
         }
         if (data.errors) {
           const modalStateErrors = [];
@@ -41,11 +40,11 @@ axios.interceptors.response.use(
         break;
       case 404:
         toast.error("not found");
-        history.push("/not-found");
+        router.navigate('/not-found');
         break;
       case 500:
         store.commonStore.setServerError(data);
-        history.push("/server-error");
+        router.navigate('/server-error')
         break;
     }
     return Promise.reject(error);
