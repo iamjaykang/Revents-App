@@ -7,6 +7,7 @@ import { ToastContainer } from "react-toastify";
 import HomePage from "../../components/home/HomePage";
 import { useStore } from "../stores/store";
 import LoadingComponent from "./LoadingComponent";
+import ModalContainer from "../common/modals/ModalContainer";
 
 function App() {
   let location = useLocation();
@@ -27,6 +28,7 @@ function App() {
 
   return (
     <>
+    <ModalContainer />
       <ToastContainer position="bottom-right" hideProgressBar />
       {location.pathname === "/" ? (
         <HomePage />
