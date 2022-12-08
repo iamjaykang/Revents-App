@@ -1,7 +1,4 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { config } from "process";
-import { useRef } from "react";
-import { Navigate, Router, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { history } from "../..";
 import { Activity } from "../models/activity";
