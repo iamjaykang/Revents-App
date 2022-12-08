@@ -31,3 +31,4 @@ All the Activity API router follows `/api/activities/`
 | 3   | `/api/activities/`          | POST   | DONE     | YES         | Create a new Activity |
 | 4   | `/api/activities/{id}` | PUT   | DONE     | YES         | Edit Activity |
 | 5   | `/api/activities/{id}` | DELETE  | DONE     | YES         | Delete Activity |
+| 6   | `/api/activities/{id}/attend` | POST  | DONE     | YES         | Attend Activity if not Host, Remove attendance if attending as attendee, Cancel Activity as host |
