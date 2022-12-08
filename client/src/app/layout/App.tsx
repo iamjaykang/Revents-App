@@ -22,7 +22,7 @@ function App() {
     } else {
       setAppLoaded();
     }
-  }, [commonStore, userStore]);
+  }, [getUser,setAppLoaded,token]);
 
   if (!appLoaded) return <LoadingComponent content="Loading app..." />;
 
