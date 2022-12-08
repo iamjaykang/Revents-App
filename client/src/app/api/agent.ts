@@ -1,6 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { toast } from "react-toastify";
 import { Activity } from "../models/activity";
+import { User, UserFormValues } from "../models/user";
 import { router } from "../router/Routes";
 import { store } from "../stores/store";
 
@@ -40,11 +41,11 @@ axios.interceptors.response.use(
         break;
       case 404:
         toast.error("not found");
-        router.navigate('/not-found');
+        router.navigate("/not-found");
         break;
       case 500:
         store.commonStore.setServerError(data);
-        router.navigate('/server-error')
+        router.navigate("/server-error");
         break;
     }
     return Promise.reject(error);
@@ -69,8 +70,16 @@ const Activities = {
   delete: (id: string) => axios.delete<void>(`/activities/${id}`),
 };
 
+const Account = {
+  current: () => requests.get<User>("/account"),
+  login: (user: UserFormValues) => requests.post<User>("/account/login", user),
+  register: (user: UserFormValues) =>
+    requests.post<User>("/account/register", user),
+};
+
 const agent = {
   Activities,
+  Account,
 };
 
 export default agent;
