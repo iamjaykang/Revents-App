@@ -4,12 +4,10 @@ import Navbar from "./Navbar";
 import { observer } from "mobx-react-lite";
 import { Outlet, useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import { useStore } from "../stores/store";
 import HomePage from "../../components/home/HomePage";
 
 function App() {
   let location = useLocation();
-  const { commonStore } = useStore();
 
   useEffect(() => {}, [location]);
 

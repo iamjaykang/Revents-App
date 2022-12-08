@@ -1,20 +1,49 @@
-import { Formik } from 'formik'
-import React from 'react'
-import { Button, Form } from 'semantic-ui-react'
-import MyTextInput from '../../app/common/form/MyTextInput'
+import { ErrorMessage, Formik } from "formik";
+import { observer } from "mobx-react-lite";
+import React from "react";
+import { Button, Form, Label } from "semantic-ui-react";
+import MyTextInput from "../../app/common/form/MyTextInput";
+import { useStore } from "../../app/stores/store";
 
 const LoginForm = () => {
-  return (
-    <Formik initialValues={{email: '', password: ''}} onSubmit={values => console.log(values)}>
-        {({handleSubmit}) => (
-            <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
-                <MyTextInput placeholder='Email' name='email' />
-                <MyTextInput placeholder='Password' name='password' type='password' />
-                <Button positive content='Login' type='submit' fluid/>
-            </Form>
-        )}
-    </Formik>
-  )
-}
+  const { userStore } = useStore();
 
-export default LoginForm
+  const { login } = userStore;
+  return (
+    <Formik
+      initialValues={{ email: "", password: "", error: null }}
+      onSubmit={(values, { setErrors }) =>
+        login(values).catch((error) =>
+          setErrors({ error: "Invalid email or password" })
+        )
+      }
+    >
+      {({ handleSubmit, isSubmitting, errors }) => (
+        <Form className="ui form" onSubmit={handleSubmit} autoComplete="off">
+          <MyTextInput placeholder="Email" name="email" />
+          <MyTextInput placeholder="Password" name="password" type="password" />
+          <ErrorMessage
+            name="error"
+            render={() => (
+              <Label
+                style={{ marginBottom: 10 }}
+                basic
+                color="red"
+                content={errors.error}
+              />
+            )}
+          />
+          <Button
+            loading={isSubmitting}
+            positive
+            content="Login"
+            type="submit"
+            fluid
+          />
+        </Form>
+      )}
+    </Formik>
+  );
+};
+
+export default observer(LoginForm);
