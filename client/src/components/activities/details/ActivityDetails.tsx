@@ -15,6 +15,8 @@ const ActivityDetails = () => {
   const { selectedActivity, loadActivity, loadingInitial } = activityStore;
   const { id } = useParams<{ id: string }>();
 
+  console.log(selectedActivity);
+
   useEffect(() => {
     if (id) loadActivity(id);
   }, [id, loadActivity]);
@@ -30,14 +32,8 @@ const ActivityDetails = () => {
         <ActivityDetailedChat />
       </Grid.Column>
       <Grid.Column width={6}>
-        <ActivityDetailedSidebar />
+        <ActivityDetailedSidebar activity={selectedActivity} />
       </Grid.Column>
-      {/* <Image
-        src={
-          selectedActivity &&
-          require(`../../../assets/images/categoryImages/${selectedActivity.category.toLowerCase()}.jpg`)
-        }
-      /> */}
     </Grid>
   );
 };
