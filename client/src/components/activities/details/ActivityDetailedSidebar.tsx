@@ -3,7 +3,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Image, Item, Label, List, Segment } from "semantic-ui-react";
 import { Activity } from "../../../app/models/activity";
-import { Profile } from "../../../app/models/profile";
 
 interface Props {
   activity: Activity;

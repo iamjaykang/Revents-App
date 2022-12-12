@@ -26,6 +26,7 @@ const ActivityListItem = ({ activity }: Props) => {
             <Item.Image
               size="tiny"
               circular
+              style={{marginBottom: 4}}
               src={require("../../../assets/images/user.png")}
             />
             <Item.Content>
@@ -44,7 +45,7 @@ const ActivityListItem = ({ activity }: Props) => {
               )}
               {activity.isGoing && !activity.isHost && (
                 <Item.Description>
-                  <Label basic color="orange">
+                  <Label basic color="green">
                     You are going to this activity
                   </Label>
                 </Item.Description>
