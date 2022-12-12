@@ -4,6 +4,7 @@ body {
 
 .ui.inverted.top.fixed.menu {
   background-image: linear-gradient(to right, #182a73, #003d83, #004f90, #00619b, #0073a4, #007ea9, #0088ad, #1392b0, #0b97b0, #0b9daf, #14a2ae, #20a7ac);
+  z-index: 2000;
 }
 
 .react-calendar {
