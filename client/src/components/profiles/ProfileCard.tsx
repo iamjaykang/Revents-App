@@ -10,7 +10,7 @@ interface Props {
 
 const ProfileCard = ({profile}: Props) => {
   return (
-    <Card as={Link} to={`/profiles/${profile.username}`}>
+    <Card as={Link} to={`/profiles/${profile.username}`} fluid>
         <Image src={profile.image || require("../../assets/images/user.png")} />
         <Card.Content>
             <Card.Header>{profile.displayName}</Card.Header>
