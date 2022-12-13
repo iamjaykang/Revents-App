@@ -1,8 +1,14 @@
 import React from 'react'
+import { Grid } from 'semantic-ui-react'
+import ProfileHeader from './ProfileHeader'
 
 const ProfilePage = () => {
   return (
-    <div>ProfilePage</div>
+    <Grid>
+        <Grid.Column width={16}>
+            <ProfileHeader />
+        </Grid.Column>
+    </Grid>
   )
 }
 
