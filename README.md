@@ -32,3 +32,19 @@ All the Activity API router follows `/api/activities/`
 | 4   | `/api/activities/{id}` | PUT   | DONE     | YES         | Edit Activity |
 | 5   | `/api/activities/{id}` | DELETE  | DONE     | YES         | Delete Activity |
 | 6   | `/api/activities/{id}/attend` | POST  | DONE     | YES         | Attend Activity if not Host, Remove attendance if attending as attendee, Cancel Activity as host |
+### Photos API Resources
+
+All the Photos API router follows `/api/photos/`
+
+| #   | Routers                   | Verbs  | Progress | Is Private | Description                                      |
+| --- | ------------------------- | ------ | -------- | ---------- | ------------------------------------------------ |
+| 1   | `/api/photos`| POST    | DONE     | YES        | Upload photos to Cloudinary |
+| 2   | `/api/photos/{id}`| DELETE   | DONE     | YES         | Delete photos from Cloudinary |
+| 3   | `/api/photos/{id}/set-main`| POST   | DONE     | YES         | Set photo as main photo |
+### Profiles API Resources
+
+All the Profiles API router follows `/api/Profiles/`
+
+| #   | Routers                   | Verbs  | Progress | Is Private | Description                                      |
+| --- | ------------------------- | ------ | -------- | ---------- | ------------------------------------------------ |
+| 1   | `/api/profiles/{username}`| GET    | DONE     | YES        | Get profile details |
