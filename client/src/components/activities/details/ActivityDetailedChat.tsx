@@ -6,6 +6,7 @@ import { Comment, Header, Loader, Segment } from "semantic-ui-react";
 import { useStore } from "../../../app/stores/store";
 import * as Yup from "yup";
 import { formatDistanceToNow } from "date-fns/esm";
+import { ChatComment } from "../../../app/models/comment";
 
 interface Props {
   activityId: string;
@@ -36,7 +37,7 @@ const ActivityDetailedChat = ({ activityId }: Props) => {
       </Segment>
       <Segment attached clearing>
         <Comment.Group>
-          {commentStore.comments.map((comment) => (
+          {commentStore.comments.map((comment: ChatComment) => (
             <Comment key={comment.id}>
               <Comment.Avatar
                 src={
