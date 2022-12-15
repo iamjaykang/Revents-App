@@ -43,6 +43,8 @@ namespace Application.Profiles
 
                 user.Bio = request.Bio ?? user.Bio;
                 user.DisplayName = request.DisplayName ?? user.DisplayName;
+                // Sets the entry of context as always modified to get 200 back even if no changes were received
+                _context.Entry(user).State = EntityState.Modified;
 
                 var success = await _context.SaveChangesAsync() > 0;
 
