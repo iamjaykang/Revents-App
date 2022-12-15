@@ -10,7 +10,7 @@ interface Props {
 
 const ProfileContent = ({profile} : Props) => {
   const panes = [
-    { menuItem: "About", render: () => <ProfileAbout />},
+    { menuItem: "About", render: () => <ProfileAbout profile={profile}/>},
     { menuItem: "Photos", render: () => <ProfilePhotos profile={profile} /> },
     { menuItem: "Events", render: () => <Tab.Pane>Events Content</Tab.Pane> },
     {
