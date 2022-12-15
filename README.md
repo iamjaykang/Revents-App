@@ -48,3 +48,4 @@ All the Profiles API router follows `/api/Profiles/`
 | #   | Routers                   | Verbs  | Progress | Is Private | Description                                      |
 | --- | ------------------------- | ------ | -------- | ---------- | ------------------------------------------------ |
 | 1   | `/api/profiles/{username}`| GET    | DONE     | YES        | Get profile details |
+| 2   | `/api/profiles/`| PUT    | DONE     | YES        | Edit profile details |
