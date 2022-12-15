@@ -1,16 +1,17 @@
+import { Formik, Form } from "formik";
 import { observer } from "mobx-react-lite";
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Button, Comment, Form, Header, Segment } from "semantic-ui-react";
+import { Button, Comment, Header, Segment } from "semantic-ui-react";
+import MyTextArea from "../../../app/common/form/MyTextArea";
 import { useStore } from "../../../app/stores/store";
 
 interface Props {
-  activityId : string;
+  activityId: string;
 }
 
-const ActivityDetailedChat = ({activityId}: Props) => {
-
-  const {commentStore} = useStore();
+const ActivityDetailedChat = ({ activityId }: Props) => {
+  const { commentStore } = useStore();
 
   useEffect(() => {
     if (activityId) {
@@ -18,9 +19,9 @@ const ActivityDetailedChat = ({activityId}: Props) => {
     }
     return () => {
       commentStore.clearComments();
-    }
-  }, [commentStore, activityId])
-  
+    };
+  }, [commentStore, activityId]);
+
   return (
     <>
       <Segment
@@ -32,32 +33,49 @@ const ActivityDetailedChat = ({activityId}: Props) => {
       >
         <Header>Chat about this event</Header>
       </Segment>
-      <Segment attached>
+      <Segment attached clearing>
         <Comment.Group>
-          {commentStore.comments.map(comment => (
-          <Comment key ={comment.id}>
-          <Comment.Avatar src={comment.image || require("../../../assets/images/user.png")} />
-          <Comment.Content>
-            <Comment.Author as={Link} to={`/profiles/${comment.username}`}>{comment.displayName}</Comment.Author>
-            <Comment.Metadata>
-              <div>{comment.createdAt}</div>
-            </Comment.Metadata>
-            <Comment.Text>{comment.body}</Comment.Text>
-            <Comment.Actions>
-              <Comment.Action>Reply</Comment.Action>
-            </Comment.Actions>
-          </Comment.Content>
-        </Comment>
+          {commentStore.comments.map((comment) => (
+            <Comment key={comment.id}>
+              <Comment.Avatar
+                src={
+                  comment.image || require("../../../assets/images/user.png")
+                }
+              />
+              <Comment.Content>
+                <Comment.Author as={Link} to={`/profiles/${comment.username}`}>
+                  {comment.displayName}
+                </Comment.Author>
+                <Comment.Metadata>
+                  <div>{comment.createdAt}</div>
+                </Comment.Metadata>
+                <Comment.Text>{comment.body}</Comment.Text>
+              </Comment.Content>
+            </Comment>
           ))}
-          <Form reply>
-            <Form.TextArea />
-            <Button
-              content="Add Reply"
-              labelPosition="left"
-              icon="edit"
-              primary
-            />
-          </Form>
+
+          <Formik
+            onSubmit={(values, { resetForm }) =>
+              commentStore.addComment(values).then(() => resetForm())
+            }
+            initialValues={{ body: "" }}
+          >
+            {({ isSubmitting, isValid }) => (
+              <Form className="ui form">
+                <MyTextArea placeholder="Add comment" name="body" rows={6} />
+                <Button
+                  loading={isSubmitting}
+                  disabled={isSubmitting || !isValid}
+                  content="Add Reply"
+                  labelPosition="left"
+                  icon="edit"
+                  primary
+                  type="submit"
+                  floated="right"
+                />
+              </Form>
+            )}
+          </Formik>
         </Comment.Group>
       </Segment>
     </>
