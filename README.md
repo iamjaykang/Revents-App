@@ -43,9 +43,17 @@ All the Photos API router follows `/api/photos/`
 | 3   | `/api/photos/{id}/set-main`| POST   | DONE     | YES         | Set photo as main photo |
 ### Profiles API Resources
 
-All the Profiles API router follows `/api/Profiles/`
+All the Profiles API router follows `/api/profiles/`
 
 | #   | Routers                   | Verbs  | Progress | Is Private | Description                                      |
 | --- | ------------------------- | ------ | -------- | ---------- | ------------------------------------------------ |
 | 1   | `/api/profiles/{username}`| GET    | DONE     | YES        | Get profile details |
 | 2   | `/api/profiles/`| PUT    | DONE     | YES        | Edit profile details |
+### Follow API Resources
+
+All the Follow API router follows `/api/follow/`
+
+| #   | Routers                   | Verbs  | Progress | Is Private | Description                                      |
+| --- | ------------------------- | ------ | -------- | ---------- | ------------------------------------------------ |
+| 1   | `/api/follow/{username}`| GET    | DONE     | YES        | Get follow details |
+| 2   | `/api/follow/{username}`| POST    | DONE     | YES        | Update the folow details |
