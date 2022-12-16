@@ -1,7 +1,10 @@
+import { observer } from "mobx-react-lite";
 import React from "react";
 import { Tab } from "semantic-ui-react";
 import { Profile } from "../../app/models/profile";
+import { useStore } from "../../app/stores/store";
 import ProfileAbout from "./ProfileAbout";
+import ProfileFollowings from "./ProfileFollowings";
 import ProfilePhotos from "./ProfilePhotos";
 
 interface Props {
@@ -9,17 +12,19 @@ interface Props {
 }
 
 const ProfileContent = ({profile} : Props) => {
+
+  const {profileStore} = useStore();
   const panes = [
     { menuItem: "About", render: () => <ProfileAbout profile={profile}/>},
     { menuItem: "Photos", render: () => <ProfilePhotos profile={profile} /> },
     { menuItem: "Events", render: () => <Tab.Pane>Events Content</Tab.Pane> },
     {
       menuItem: "Followers",
-      render: () => <Tab.Pane>Followers Content</Tab.Pane>,
+      render: () => <ProfileFollowings />,
     },
     {
       menuItem: "Following",
-      render: () => <Tab.Pane>Following Content</Tab.Pane>,
+      render: () => <ProfileFollowings />,
     },
   ];
   return (
@@ -27,8 +32,9 @@ const ProfileContent = ({profile} : Props) => {
       menu={{ fluid: true, vertical: true }}
       menuPosition="right"
       panes={panes}
+      onTabChange={(e, data) => profileStore.setActiveTab(data.activeIndex)}
     />
   );
 };
 
-export default ProfileContent;
+export default observer(ProfileContent);
