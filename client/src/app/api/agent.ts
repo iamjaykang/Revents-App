@@ -13,11 +13,11 @@ const sleep = (delay: number) => {
   });
 };
 
-axios.defaults.baseURL = "http://localhost:5000/api";
+axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
 axios.interceptors.response.use(
   async (res) => {
-    await sleep(1000);
+    if(process.env.NODE_ENV === 'development') await sleep(1000);
     const pagination = res.headers["pagination"];
     if (pagination) {
       res.data = new PaginatedResult(res.data, JSON.parse(pagination));
