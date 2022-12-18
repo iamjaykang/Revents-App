@@ -1,4 +1,4 @@
-# fly.toml file generated for revents on 2022-12-19T01:12:48+13:00
+# fly.toml file generated for revents on 2022-12-19T03:18:25+13:00
 
 app = "revents"
 kill_signal = "SIGINT"
@@ -9,9 +9,9 @@ processes = []
   image = "jaykangisme/revents:latest"
 
 [env]
-ASPNETCORE_URLS="http://+:8080"
-Cloudinary__CloudName="dnk67giua"
-Cloudinary__ApiKey="958848851624471"
+  ASPNETCORE_URLS="http://+:8080"
+  Cloudinary__CloudName="dnk67giua"
+  Cloudinary__ApiKey="958848851624471"
 
 [experimental]
   allowed_public_ports = []
