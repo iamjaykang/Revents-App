@@ -35,7 +35,7 @@ const RegisterForm = () => {
         <Form className="ui form error" onSubmit={handleSubmit} autoComplete="off">
           <Header
             as="h2"
-            content="Sign up to Reactivities"
+            content="Sign up to Revents"
             color="teal"
             textAlign="center"
           />

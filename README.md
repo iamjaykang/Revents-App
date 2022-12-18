@@ -1,10 +1,11 @@
-# Reactivity API
+# Revents API
 
 This API is a part of Reactivity app created with React TypeScript and .NET
 
 ## How to use
 
 - run `git clone ...`
+- run `dotnet restore .`
 - run `cd API`
 - run `dotnet run`
 

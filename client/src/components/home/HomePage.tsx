@@ -21,11 +21,11 @@ const HomePage = () => {
             alt="logo"
             style={{ marginBottom: 12 }}
           />
-          Reactivities
+          Revents
         </Header>
         {isLoggedIn ? (
           <>
-            <Header as="h2" inverted content="Welcome to Reactivities" />
+            <Header as="h2" inverted content="Welcome to Revents" />
             <Button as={Link} to="/activities" size="huge" inverted>
               Go to Activities!
             </Button>

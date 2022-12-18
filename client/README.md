@@ -1,4 +1,4 @@
-# Reactivities Client App
+# Revents Client App
 
 ## How to use
 

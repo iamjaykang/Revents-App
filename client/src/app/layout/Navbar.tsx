@@ -15,7 +15,7 @@ const Navbar = () => {
       <Container>
         <Menu.Item as={NavLink} to="/" header>
           <img src={logo} alt="logo" style={{ marginRight: "10px" }} />
-          Reactivities
+          Revents
         </Menu.Item>
         <Menu.Item as={NavLink} to="/activities" name="Activities" />
         <Menu.Item as={NavLink} to="/errors" name="Errors" />
