@@ -1,10 +1,12 @@
-name: docker-push
+name: build-push-deploy
 
 on:
   workflow_dispatch:
   # push:
   #   branches:
   #     - 'main'
+env:
+  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
 jobs:
   build:
@@ -22,10 +24,28 @@ jobs:
           CI: true
       - 
         name: Archive build artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: build
           path: API/wwwroot  
+
+  push_to_Docker_Hub:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    # build docker image and push to docker hub
+    # only if the app build successfully
+    needs: [build]
+
+    steps:
+      -
+        name: checkout repo
+        uses: actions/checkout@v2
+      - 
+        name: download build artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: build
+          path: API/wwwroot
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
@@ -41,3 +61,15 @@ jobs:
         with:
           push: true
           tags: jaykangisme/revents:latest
+
+  deploy:
+    needs: push_to_Docker_Hub
+    name: Deploy app
+    runs-on: ubuntu-latest
+    steps:
+      - 
+        uses: actions/checkout@v3
+      - 
+        uses: superfly/flyctl-actions/setup-flyctl@master
+      - 
+        run: flyctl deploy --remote-only
