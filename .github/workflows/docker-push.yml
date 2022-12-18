@@ -16,7 +16,7 @@ jobs:
         name: Install dependencies
         run: npm install --prefix client
       - 
-        name: Build
+        name: build
         run: npm run build --prefix client
         env:
           CI: true
@@ -26,9 +26,6 @@ jobs:
         with:
           name: build
           path: API/wwwroot  
-  docker:
-    runs-on: ubuntu-latest
-    steps:
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
