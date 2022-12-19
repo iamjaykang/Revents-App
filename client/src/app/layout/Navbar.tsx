@@ -17,14 +17,14 @@ const Navbar = () => {
           <img src={logo} alt="logo" style={{ marginRight: "10px" }} />
           Revents
         </Menu.Item>
-        <Menu.Item as={NavLink} to="/activities" name="Activities" />
+        <Menu.Item as={NavLink} to="/activities" name="Events" />
         <Menu.Item as={NavLink} to="/errors" name="Errors" />
         <Menu.Item>
           <Button
             as={NavLink}
-            to="/create-activity"
+            to="/create-activities"
             positive
-            content="Create Activity"
+            content="Create Event"
           />
         </Menu.Item>
         <Menu.Item position="right">

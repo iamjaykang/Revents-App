@@ -27,7 +27,7 @@ const HomePage = () => {
           <>
             <Header as="h2" inverted content="Welcome to Revents" />
             <Button as={Link} to="/activities" size="huge" inverted>
-              Go to Activities!
+              Go to Events!
             </Button>
           </>
         ) : (

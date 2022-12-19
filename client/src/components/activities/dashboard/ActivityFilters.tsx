@@ -11,7 +11,7 @@ const ActivityFilters = () => {
       <Menu vertical size="large" style={{ width: "100%", marginTop: 28 }}>
         <Header icon="filter" attached color="teal" content="Filters" />
         <Menu.Item 
-        content="All Activities" 
+        content="All Events" 
         active={predicate.has('all')}
         onClick={() => setPredicate('all', 'true')}
         />
