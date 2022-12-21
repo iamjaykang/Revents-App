@@ -1,6 +1,8 @@
 # Revents API
 
-This API is a part of Reactivity app created with React TypeScript and .NET with A rating on security on https://securityheaders.com/
+This API is a part of Reactivity app created with React TypeScript and .NET with A+ rating on security on snyk.io
+
+Live version: https://revents.fly.dev
 
 ## How to use
 
